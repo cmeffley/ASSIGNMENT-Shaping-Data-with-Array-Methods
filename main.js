@@ -112,19 +112,87 @@ const businesses = [
 ];
 
 // FOR EACH LOOP
-const bus = document.querySelector('#foreach')
-bus.innerHTML = "<h1>Active Businesses</h1>"
+const activeBusiness = () => {
+const outE1 = document.querySelector('#foreach');
+outE1.innerHTML = "<h1>Active Businesses</h1>";
 
 businesses.forEach((element) => {
-  bus.innerHTML +=`
-                <h2>${element.companyName}</h2>
-                <section>
+  outE1.innerHTML +=`
+              <h2>${element.companyName}</h2>
+              <section>
                 ${element.addressFullStreet}
-                </section>
-                <section>
+              </section>
+              <section>
                 ${element.addressCity}
                 ${element['addressStateCode']}
                 ${element['addressZipCode']}
-                </section>`
-                bus.innerHTML += "<hr/>"
+              </section>`
+                outE1.innerHTML += "<hr/>"
 });
+};
+
+//FILTER
+const businessInNewYork = () => {
+const newYorkBusinesses = businesses.filter((business) => {
+  let inNewYork = false;
+
+  if (business.addressStateCode === 'NY') {
+    inNewYork = true;
+  }
+   return inNewYork;
+});
+
+const outE1 = document.querySelector('#filter');
+outE1.innerHTML = "<h1>New York Businesses</h1>";
+
+newYorkBusinesses.forEach((element) => {
+  outE1.innerHTML +=`
+              <h2>${element.companyName}</h2>
+              <section>
+                ${element.addressFullStreet}
+              </section>
+              <section>
+                ${element.addressCity}
+                ${element['addressStateCode']}
+                ${element['addressZipCode']}
+              </section>`
+                outE1.innerHTML += "<hr/>"
+});
+};
+
+const manufactorBusiness = () => {
+  const factory = businesses.filter((business) => {
+    let industry = false;
+
+    if (business.companyIndustry === 'Manufacturing') {
+        industry = true;
+    }
+    return industry;
+  });
+  
+  const outE1 = document.querySelector('#filter-industry');
+  outE1.innerHTML = "<h1>Manufacturing Businesses</h1>";
+
+factory.forEach((element) => {
+  outE1.innerHTML +=`
+              <h2>${element.companyName}</h2>
+              <section>
+                ${element.addressFullStreet}
+              </section>
+              <section>
+                ${element.addressCity}
+                ${element['addressStateCode']}
+                ${element['addressZipCode']}
+              </section>`
+                outE1.innerHTML += "<hr/>"
+});
+}
+
+
+const init = () => {
+  activeBusiness();
+  businessInNewYork();
+  manufactorBusiness();
+};
+
+init();
