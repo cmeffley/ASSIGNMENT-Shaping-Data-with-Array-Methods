@@ -197,10 +197,10 @@ const agentsForPurchases = () => {
     const bus = business.purchasingAgent;
     const name = business.companyName;
     const phone = business.phoneWork;
-    return [bus, name, phone];
+    return { bus, name, phone };
 });
   
-  console.log(agents); //console.log is correct, what is DOM issue - const agents are undefined?
+   console.log(agents)//console.log is correct, what is DOM issue - const agents are undefined?
 
   agents.forEach((agent) => {
     outE1.innerHTML += `
