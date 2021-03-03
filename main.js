@@ -198,8 +198,6 @@ const agentsForPurchases = () => {
     company: business.companyName,
     phoneNumber: business.phoneWork,
 }));
-
-console.log(agents);
   
    agents.forEach((agent) => {
     outE1.innerHTML += `
@@ -213,11 +211,40 @@ console.log(agents);
 }
 
 
+// **********FIND****************
+const findAgents = () => {
+document.querySelector("#companySearch").addEventListener("keypress", keyPressEvent => {
+        if (keyPressEvent.charCode === 13) {
+            const foundBusiness = businesses.find(
+                business =>
+                    business.purchasingAgent.nameFirst.includes(keyPressEvent.target.value) || business.purchasingAgent.nameLast.includes(keyPressEvent.target.value)
+            );
+            outE1 = document.querySelector('#find').innerHTML = `
+                <h2>
+                ${foundBusiness.purchasingAgent.nameFirst} ${foundBusiness.purchasingAgent.nameLast}
+                </h2>
+                <h4>${foundBusiness.companyName}</h4>
+                <section>
+                ${foundBusiness.addressFullStreet}
+
+                </section>
+                <section>
+                ${foundBusiness.addressCity},
+                ${foundBusiness.addressStateCode}
+                ${foundBusiness.addressZipCode}
+                </section>
+            `;
+        }
+    });
+}
+
+
 const init = () => {
   activeBusiness();
   businessInNewYork();
   manufactorBusiness();
   agentsForPurchases();
+  findAgents();
 };
 
 init();
