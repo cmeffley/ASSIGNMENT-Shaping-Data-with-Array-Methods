@@ -193,21 +193,20 @@ const agentsForPurchases = () => {
   const outE1 = document.querySelector('#map');
   outE1.innerHTML += "<h1>Purchasing Agents</h1>"
 
-  const agents = businesses.map(business => {
-    const bus = business.purchasingAgent;
-    const name = business.companyName;
-    const phone = business.phoneWork;
-    return { bus, name, phone };
-});
-  
-   console.log(agents)//console.log is correct, what is DOM issue - const agents are undefined?
+  const agents = businesses.map((business) => ({
+    fullName: `${business.purchasingAgent.nameFirst} ${business.purchasingAgent.nameLast}`,
+    company: business.companyName,
+    phoneNumber: business.phoneWork,
+}));
 
-  agents.forEach((agent) => {
+console.log(agents);
+  
+   agents.forEach((agent) => {
     outE1.innerHTML += `
-                      <h3>${agent.nameFirst} ${agent.nameLast}</h3>
+                      <h3>${agent.fullName}</h3>
                       <section>
-                        ${agent.companyName}
-                        ${agent.phoneWork}
+                        ${agent.company}<br/>
+                        ${agent.phoneNumber}
                       </section>`
     outE1.innerHTML += "<hr />"
   });
