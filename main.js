@@ -238,6 +238,29 @@ document.querySelector("#companySearch").addEventListener("keypress", keyPressEv
     });
 }
 
+//*************REDUCE**********************
+const reduceMethod = () => {
+  const monthlyRainfall = [23, 13, 27, 20, 20, 31, 33, 26, 19, 12, 14, 12, 10]
+
+const totalRainfall = monthlyRainfall.reduce((currentRain, addingRain) => currentRain += addingRain,
+0
+)
+outE1 = document.querySelector('#reduce').innerHTML = totalRainfall;
+console.log(totalRainfall);
+
+
+const words = ["The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog"]
+
+const sentence = words.reduce((currentSentence, newSentence) => currentSentence += newSentence,
+("")
+)
+outE1 = document.querySelector('#reduce').innerHTML += sentence;
+console.log(sentence);
+
+}
+
+
+
 
 const init = () => {
   activeBusiness();
@@ -245,6 +268,7 @@ const init = () => {
   manufactorBusiness();
   agentsForPurchases();
   findAgents();
+  reduceMethod();
 };
 
 init();
