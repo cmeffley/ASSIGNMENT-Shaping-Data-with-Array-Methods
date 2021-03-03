@@ -111,7 +111,7 @@ const businesses = [
   }
 ];
 
-// FOR EACH LOOP
+//************FOR EACH LOOP***************
 const activeBusiness = () => {
 const outE1 = document.querySelector('#foreach');
 outE1.innerHTML = "<h1>Active Businesses</h1>";
@@ -131,7 +131,7 @@ businesses.forEach((element) => {
 });
 };
 
-//FILTER
+//**************FILTER**************
 const businessInNewYork = () => {
 const newYorkBusinesses = businesses.filter((business) => {
   let inNewYork = false;
@@ -188,20 +188,42 @@ factory.forEach((element) => {
 });
 }
 
+//*****************MAP*****************
+const agentsForPurchases = () => {
+  const outE1 = document.querySelector('#map');
+  outE1.innerHTML += "<h1>Purchasing Agents</h1>"
+
+  const agents = businesses.map((business) => ({
+    fullName: `${business.purchasingAgent.nameFirst} ${business.purchasingAgent.nameLast}`,
+    company: business.companyName,
+    phoneNumber: business.phoneWork,
+}));
+  
+   agents.forEach((agent) => {
+    outE1.innerHTML += `
+                      <h3>${agent.fullName}</h3>
+                      <section>
+                        ${agent.company}<br/>
+                        ${agent.phoneNumber}
+                      </section>`
+    outE1.innerHTML += "<hr />"
+  });
+}
+
+
 // **********FIND****************
 const findAgents = () => {
 document.querySelector("#companySearch").addEventListener("keypress", keyPressEvent => {
         if (keyPressEvent.charCode === 13) {
-            /* WHEN  USER PRESSES ENTER, FIND MATCHING BUSINESS */
             const foundBusiness = businesses.find(
                 business =>
-                    business.companyName.includes(keyPressEvent.target.value)
+                    business.purchasingAgent.nameFirst.includes(keyPressEvent.target.value) || business.purchasingAgent.nameLast.includes(keyPressEvent.target.value)
             );
-            const outE1 = document.querySelector('#find');
-            outEl.innerHTML = `
+            outE1 = document.querySelector('#find').innerHTML = `
                 <h2>
-                ${foundBusiness.companyName}
+                ${foundBusiness.purchasingAgent.nameFirst} ${foundBusiness.purchasingAgent.nameLast}
                 </h2>
+                <h4>${foundBusiness.companyName}</h4>
                 <section>
                 ${foundBusiness.addressFullStreet}
 
@@ -216,10 +238,12 @@ document.querySelector("#companySearch").addEventListener("keypress", keyPressEv
     });
 }
 
+
 const init = () => {
   activeBusiness();
   businessInNewYork();
   manufactorBusiness();
+  agentsForPurchases();
   findAgents();
 };
 
