@@ -188,11 +188,39 @@ factory.forEach((element) => {
 });
 }
 
+// **********FIND****************
+const findAgents = () => {
+document.querySelector("#companySearch").addEventListener("keypress", keyPressEvent => {
+        if (keyPressEvent.charCode === 13) {
+            /* WHEN  USER PRESSES ENTER, FIND MATCHING BUSINESS */
+            const foundBusiness = businesses.find(
+                business =>
+                    business.companyName.includes(keyPressEvent.target.value)
+            );
+            const outE1 = document.querySelector('#find');
+            outEl.innerHTML = `
+                <h2>
+                ${foundBusiness.companyName}
+                </h2>
+                <section>
+                ${foundBusiness.addressFullStreet}
+
+                </section>
+                <section>
+                ${foundBusiness.addressCity},
+                ${foundBusiness.addressStateCode}
+                ${foundBusiness.addressZipCode}
+                </section>
+            `;
+        }
+    });
+}
 
 const init = () => {
   activeBusiness();
   businessInNewYork();
   manufactorBusiness();
+  findAgents();
 };
 
 init();
