@@ -111,7 +111,7 @@ const businesses = [
   }
 ];
 
-// FOR EACH LOOP
+//************FOR EACH LOOP***************
 const activeBusiness = () => {
 const outE1 = document.querySelector('#foreach');
 outE1.innerHTML = "<h1>Active Businesses</h1>";
@@ -131,7 +131,7 @@ businesses.forEach((element) => {
 });
 };
 
-//FILTER
+//**************FILTER**************
 const businessInNewYork = () => {
 const newYorkBusinesses = businesses.filter((business) => {
   let inNewYork = false;
@@ -188,11 +188,36 @@ factory.forEach((element) => {
 });
 }
 
+//*****************MAP*****************
+const agentsForPurchases = () => {
+  const outE1 = document.querySelector('#map');
+  outE1.innerHTML += "<h1>Purchasing Agents</h1>"
+
+  const agents = businesses.map((business) => ({
+    fullName: `${business.purchasingAgent.nameFirst} ${business.purchasingAgent.nameLast}`,
+    company: business.companyName,
+    phoneNumber: business.phoneWork,
+}));
+
+console.log(agents);
+  
+   agents.forEach((agent) => {
+    outE1.innerHTML += `
+                      <h3>${agent.fullName}</h3>
+                      <section>
+                        ${agent.company}<br/>
+                        ${agent.phoneNumber}
+                      </section>`
+    outE1.innerHTML += "<hr />"
+  });
+}
+
 
 const init = () => {
   activeBusiness();
   businessInNewYork();
   manufactorBusiness();
+  agentsForPurchases();
 };
 
 init();
