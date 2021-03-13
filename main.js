@@ -259,7 +259,34 @@ console.log(sentence);
 
 }
 
+// *************BIG SPENDERS***************
+const spendersPractice = () => {
+  const bigSpenders = businesses.filter(business => {
+    let bigOrder = false;
+    business.orders.forEach(order => {
+      if (order > 9000) {
+      bigOrder = true;
+      }
+    });
+      return bigOrder;
+  });
 
+  const outE1 = document.querySelector('#bigSpender');
+outE1.innerHTML = "<h1>Big Spenders</h1>";
+  bigSpenders.forEach((element) => {
+    outE1.innerHTML +=`
+                <h2>${element.companyName}</h2>
+                <section>
+                  ${element.addressFullStreet}
+                </section>
+                <section>
+                  ${element.addressCity}
+                  ${element['addressStateCode']}
+                  ${element['addressZipCode']}
+                </section>`
+                  outE1.innerHTML += "<hr/>"
+  });
+}
 
 
 const init = () => {
@@ -269,6 +296,7 @@ const init = () => {
   agentsForPurchases();
   findAgents();
   reduceMethod();
+  spendersPractice();
 };
 
 init();
